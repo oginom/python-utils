@@ -1,12 +1,10 @@
+#!/usr/bin/env python3
+
 def gcf(n, m):
   if n > m:
-    l = n
-    n = m
-    m = l
+    n, m = m, n
   while n != 0:
-    l = n
-    n = m % n
-    m = l
+    n, m = m % n, n
   return m
 
 def rho(n):
@@ -21,7 +19,7 @@ def rho(n):
         y = (y * y + 1) % n
         y = (y * y + 1) % n
       elif d < n:
-        ret.append(d)
+        ret.extend(rho(d))
         n //= d
         break
       else:
@@ -45,7 +43,10 @@ def trialdiv(n, known=None):
 
 if __name__ == '__main__':
   while True:
-    n = int(input('input number to prime factorize : '))
+    try:
+      n = int(input('input number to prime factorize : '))
+    except:
+      break
     if not n > 0:
       break
     ret = rho(n)
